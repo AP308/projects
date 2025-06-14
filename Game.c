@@ -113,15 +113,15 @@ int map_AddRect(int p, int x1, int y1, int z1, int width, int height, int angleX
 
 	//angleY -= 90;
 
-	int ex1 = + width / 2 * cos(angleY * 3.14 / 180) + height / 2 * cos((angleY - 90) * 3.14 / 180);
-	int ey1 = + width / 2 * sin(angleY * 3.14 / 180) + height / 2 * sin((angleY - 90) * 3.14 / 180);
-	
-	int ex2 = + width / 2 * cos(angleY * 3.14 / 180) - height / 2 * cos((angleY - 90) * 3.14 / 180);
-	int ey2 = + width / 2 * sin(angleY * 3.14 / 180) - height / 2 * sin((angleY - 90) * 3.14 / 180);
+	int ex1 = +width / 2 * cos(angleY * 3.14 / 180) + height / 2 * cos((angleY - 90) * 3.14 / 180);
+	int ey1 = +width / 2 * sin(angleY * 3.14 / 180) + height / 2 * sin((angleY - 90) * 3.14 / 180);
 
-	int ex3 = - width / 2 * cos(angleY * 3.14 / 180) - height / 2 * cos((angleY - 90) * 3.14 / 180);
-	int ey3 = - width / 2 * sin(angleY * 3.14 / 180) - height / 2 * sin((angleY - 90) * 3.14 / 180);
-	
+	int ex2 = +width / 2 * cos(angleY * 3.14 / 180) - height / 2 * cos((angleY - 90) * 3.14 / 180);
+	int ey2 = +width / 2 * sin(angleY * 3.14 / 180) - height / 2 * sin((angleY - 90) * 3.14 / 180);
+
+	int ex3 = -width / 2 * cos(angleY * 3.14 / 180) - height / 2 * cos((angleY - 90) * 3.14 / 180);
+	int ey3 = -width / 2 * sin(angleY * 3.14 / 180) - height / 2 * sin((angleY - 90) * 3.14 / 180);
+
 	map_AddPolygon(
 		p,
 
@@ -138,8 +138,8 @@ int map_AddRect(int p, int x1, int y1, int z1, int width, int height, int angleX
 		x1 + width / 2 * cos(angleY * 3.14 / 180) - height / 2 * cos((angleY - 90) * 3.14 / 180),
 		y1,
 		z1 + width / 2 * sin(angleY * 3.14 / 180) - height / 2 * sin((angleY - 90) * 3.14 / 180),*/
-		
-		
+
+
 		x1 + width / 2 * cos(angleX * 3.14 / 180) + ex1,
 		y1 - height / 2 * sin(angleX * 3.14 / 180) - height / 2 * sin(angleZ * 3.14 / 180),
 		z1 - height / 2 * cos(angleZ * 3.14 / 180) + ey1,
@@ -151,8 +151,8 @@ int map_AddRect(int p, int x1, int y1, int z1, int width, int height, int angleX
 		x1 - width / 2 * cos(angleX * 3.14 / 180) + ex3,
 		y1 + height / 2 * sin(angleX * 3.14 / 180) + height / 2 * sin(angleZ * 3.14 / 180),
 		z1 + height / 2 * cos(angleZ * 3.14 / 180) + ey3,
-		
-		
+
+
 
 		-1
 
@@ -160,7 +160,7 @@ int map_AddRect(int p, int x1, int y1, int z1, int width, int height, int angleX
 
 	//angleX = 20;
 	//angleX
-	
+
 	/*
 	map_AddPolygon(
 		p,
@@ -168,33 +168,33 @@ int map_AddRect(int p, int x1, int y1, int z1, int width, int height, int angleX
 		x1 + width / 2 * cos(angleX * 3.14 / 180),
 		y1 + height / 2 * sin(angleX * 3.14 / 180),
 		z1 - width / 2,
-		
+
 		x1 + width / 2 * cos(angleX * 3.14 / 180),
 		y1 - height / 2 * sin(angleX * 3.14 / 180),
 		z1 + width / 2,
-		
+
 		//50, 50, 50,
 		x1 - width / 2 * cos(angleX * 3.14 / 180),
 		y1 + height / 2 * sin(angleX * 3.14 / 180),
 		z1 + width / 2,
-		
+
 
 
 		-1
 
 	);
-	
 
-	
+
+
 	//angleZ
-	
+
 	map_AddPolygon(
 		p,
 
 		x1 + width / 2,
 		y1 - height / 2 * cos(angleZ * 3.14 / 180),
 		z1 - width / 2 * sin(angleZ * 3.14 / 180),
-		
+
 		x1 - width / 2,
 		y1 - height / 2 * cos(angleZ * 3.14 / 180),
 		z1 - width / 2 * sin(angleZ * 3.14 / 180),
@@ -206,11 +206,11 @@ int map_AddRect(int p, int x1, int y1, int z1, int width, int height, int angleX
 		-1
 
 	);
-	
+
 	//angleY
 	map_AddPolygon(
 		p,
-		
+
 		x1 + width / 2 * cos(angleY * 3.14 / 180),
 		y1 - height / 2,
 		z1 - width / 2 * sin(angleY * 3.14 / 180),
@@ -222,7 +222,7 @@ int map_AddRect(int p, int x1, int y1, int z1, int width, int height, int angleX
 		x1 - width / 2 * cos(angleY * 3.14 / 180),
 		y1 + height / 2,
 		z1 + width / 2 * sin(angleY * 3.14 / 180),
-		
+
 		-1
 
 	);
@@ -232,7 +232,7 @@ int map_AddRect(int p, int x1, int y1, int z1, int width, int height, int angleX
 
 	/*
 	// rX = 0
-	
+
 	map_AddPolygon(x1 - width / 2, y1 - height / 2, z1, x1 + width / 2, y1 - height / 2, z1, x1 - width / 2, y1 + height / 2, z1, -1);
 	map_AddPolygon(x1 + width / 2, y1 + height / 2, z1, x1 - width / 2, y1 + height / 2, z1, x1 + width / 2, y1 - height / 2, z1, -1);
 
@@ -296,7 +296,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	// create map
 
 	//map_AddRect(map_GetEnd(), 300, 50, 200, 200, 100, 0, 0, 0, -1);
-	
+
 	map_AddPolygon(map_GetEnd(), 100, 0, 100, 100, 30, 200, 220, 0, 120, -1);
 
 
@@ -349,11 +349,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 
-
 		for (int i = 0; i < 128; i++) {
 			keys[i] = GetKeyState(i) / 10;
 		};
-
 
 		if (keys[27]) {	// esc
 			SendMessage(hWnd, WM_CLOSE, NULL, NULL);
@@ -393,7 +391,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			plr.z -= plr.speed * sin(plr.angleX * 3.14 / 180);
 		};
 
-
 		if (keys[65]) {	// A
 			plr.x += plr.speed * cos((plr.angleX + 90) * 3.14 / 180);
 			plr.z += plr.speed * sin((plr.angleX + 90) * 3.14 / 180);
@@ -425,17 +422,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			angZ += 2;
 		};
 
-
 		for (int i = 0; i < frame.width * frame.height; i++) {
 			frame.pixels[i] = 0;
 		};
-
-
-
-
-
-		//map_AddRect(0, 300, 50, 200, 200, 50, angX, angY, angZ, -1);
-
 
 		for (int i = 0; i < map_polygonAmount; i++) {
 
@@ -471,37 +460,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			frame_DrawText(&frame, x2, z2, "v1", 2, 2, -1);
 			frame_DrawText(&frame, x3, z3, "v2", 2, 2, -1);
 
-			
-		
-			//double CollisionDistance(double x1, double y1, double angle, int vertices[5]) {
-
-			//x1 - plrX
-			//y1 - plrY
-			//angle  - plrAngle
-
-			/*int x2 = vertices[1];
-			int y2 = vertices[2];
-			int x3 = vertices[3];
-			int y3 = vertices[4];*/
-
-			//int plrX = plr.x;
-			//int plrZ = plr.z;
-
-			//int vX1 = x3;
-
-			
-
-			//frame_DrawLineA(&frame, x1, z1, 20, DeltasToDegrees(x1 - plr.x, z1 - plr.z), 0x00FF0000);
-
-			//frame_DrawLineA(&frame, x1, z1, 20, DeltasToDegrees(x1 - plr.x, z1 - plr.z), 0x00FF0000);
-
 		};
 
 
 		double render_pixWidth = (frame.width) / plr.fov;
 		double render_pixHeight = (frame.height) / plr.fov;
 
-		//frame_DrawRect(&frame, render_border, render_border, frame.width - render_border, frame.height - render_border, 0x00FF0000);
 
 
 		for (int p = 0; p < map_polygonAmount; p++) {
@@ -510,48 +474,21 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 				continue;
 			};
 
-
 			int frame_x[3] = { 0 };
 			int frame_y[3] = { 0 };
 
-			
-			int inVertice = 1;
-
-			int angle1 = DeltasToDegrees(map_vertices[p][mX2] - map_vertices[p][mX1], map_vertices[p][mZ2] - map_vertices[p][mZ1]);
-			int angle2 = DeltasToDegrees(map_vertices[p][mX3] - map_vertices[p][mX1], map_vertices[p][mZ3] - map_vertices[p][mZ1]);
-			int angle = DeltasToDegrees(plr.x - map_vertices[p][mX1], plr.z - map_vertices[p][mZ1]);
-
-			if (NormalizeAngle(angle) > NormalizeAngle(angle1) == NormalizeAngle(angle) > NormalizeAngle(angle2)) {
-				inVertice = 0;
-			};
-
-			angle1 = DeltasToDegrees(map_vertices[p][mX3] - map_vertices[p][mX2], map_vertices[p][mZ3] - map_vertices[p][mZ2]);
-			angle2 = DeltasToDegrees(map_vertices[p][mX1] - map_vertices[p][mX2], map_vertices[p][mZ1] - map_vertices[p][mZ2]);
-			angle = DeltasToDegrees(plr.x - map_vertices[p][mX2], plr.z - map_vertices[p][mZ2]);
-
-			if (NormalizeAngle(angle) > NormalizeAngle(angle1) == NormalizeAngle(angle) > NormalizeAngle(angle2)) {
-				inVertice = 0;
-			};
-
-			if (inVertice) {
-				frame_DrawCircleFilled(&frame, frame.width - 50, 50, 20, 0x00FF1100);
-			};
-			
-
 			int numOut = 0;
 
-			for (int v = 0; v < 3; v++) {
 
+			for (int v = 0; v < 3; v++) {
 
 				int deltaX = plr.x - map_vertices[p][v * 3];
 				int deltaY = map_vertices[p][v * 3 + 1] - plr.y;
 				int deltaZ = plr.z - map_vertices[p][v * 3 + 2];
 
-
 				double angleX = DeltasToDegrees(deltaX, deltaZ);
 				int distX = sqrt(deltaX * deltaX + deltaZ * deltaZ);
 				double angleY = DeltasToDegrees(distX, deltaY);
-
 
 				angleX -= plr.angleX;
 				angleX = NormalizeAngle(angleX);
@@ -561,109 +498,35 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 				};
 
 				angleY -= plr.angleY;
-				//angleY = NormalizeAngle(angleY);
-
-				if (angleY > 0) {
-					//angleY -= 180;
-				};
-
-				//angleY = NormalizeAngle(
 
 				frame_x[v] = frame.width - (render_pixWidth * angleX + frame.width / 2);
 				frame_y[v] = render_pixHeight * angleY + frame.height / 2;
 
-				
 				int angleOut_left = (angleX < plr.fov / -2);
 				int angleOut_right = (angleX > plr.fov / 2);
 				int angleOut_top = (angleY > plr.fov / 2);
-				int angleOut_behind= (angleX < plr.fov * -1) || (angleX > plr.fov);
+				int angleOut_behind = (angleX < plr.fov * -1) || (angleX > plr.fov);
 
 				int text_color = -1;
 
 				if (angleOut_behind) {
 
 					angleX += (180) * (angleOut_left)
-						+ (-180) * (angleOut_right);
-
-
-					int px1 = -1;
-					int pz1 = -1;
-
-					int px2 = -1;
-					int pz2 = -1;
-
-					//for (int v = 0; v < 3; v++) {
-
-					int px = -1;
-					int pz = -1;
-
-
-					double m1 = tan(1.0 * plr.angleX * 3.14 / 180);
-					int b1 = map_vertices[p][v * 3 + 2] - m1 * map_vertices[p][v * 3];
-
-					int x1 = map_vertices[p][(v + 1) % 3 * 3];
-					int z1 = map_vertices[p][(v + 1) % 3 * 3 + 2];
-					int x2 = map_vertices[p][(v + 2) % 3 * 3];
-					int z2 = map_vertices[p][(v + 2) % 3 * 3 + 2];
-
-					double m2 = 0;
-
-					if (x2 - x1 != 0) {
-						m2 = (1.0 * z2 - z1) / (x2 - x1);
-					};
-
-					int b2 = z1 - m2 * x1;
-
-					if (m1 - m2 != 0) {
-						px = (1.0 * b2 - b1) / (m1 - m2);
-					};
-
-					pz = m1 * px + b1;
-
-					if (x2 - x1 == 0) {
-						px = x2;
-						pz = m1 * px + b1;
-					};
-
-					if (((int)(plr.angleX) - 90) % 180 == 0) {
-						px = plr.x;
-						pz = m2 * px + b2;
-					};
-
-					if ((px < x1 == px < x2) && (pz < z1 == pz < z2)) {
-						continue;
-					};
-
-					frame_DrawCircleFilled(&frame, px, pz, 5, 0x0000FF00);
-
-					/*
-					if (px1 == -1) {
-						px1 = px;
-						pz1 = pz;
-						continue;
-					};
-
-					px2 = px;
-					pz2 = pz;*/
-
-					//};
-
-					frame_DrawLine(&frame, map_vertices[p][v * 3], map_vertices[p][v * 3 + 2], px, pz, 0x00FF5500);
-
-					int dist = sqrt( (map_vertices[p][v * 3] - px) * (map_vertices[p][v * 3] - px) + (map_vertices[p][v * 3 + 2] - pz) * (map_vertices[p][v * 3 + 2] - pz) );
-
-					distX = sqrt(deltaX * deltaX + deltaZ * deltaZ);
-					
-					angleY = DeltasToDegrees(0, deltaY) + DeltasToDegrees(dist - distX, deltaY);
+						+(-180) * (angleOut_right);
 
 					frame_x[v] = (render_pixWidth * angleX + frame.width / 2);
+
+					angleY = 180 - angleY;
+
 					frame_y[v] = render_pixHeight * angleY + frame.height / 2;
 
 					frame_DrawCircleFilled(&frame, 50, 130, 10, 0x0000FF00);
 					text_color = 0x0000FF00;
 
+
 				};
-				
+
+				// (debug) display angleOut flags
 				if (angleOut_top) {
 					frame_DrawCircleFilled(&frame, 50, 150, 10, 0x00FF0000);
 					frame_DrawText(&frame, 50, 150, "Top", 2, -1, -1);
@@ -690,6 +553,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 					numOut++;
 				};
 
+				// (debug) display vertice stats
 				char text[string_maxLength] = { 0 };
 
 				text_AppendString(&text, "v:");
@@ -715,82 +579,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 			};
 
-			/*
-			int px1 = -1;
-			int pz1 = -1;
-
-			int px2 = -1;
-			int pz2 = -1;
-
-			for (int v = 0; v < 3; v++) {
-
-				int px = -1;
-				int pz = -1;
-
-
-				double m1 = tan(1.0 * plr.angleX * 3.14 / 180);
-				int b1 = plr.z - m1 * plr.x;
-
-				int x1 = map_vertices[p][v * 3];
-				int z1 = map_vertices[p][v * 3 + 2];
-				int x2 = map_vertices[p][(v + 1) % 3 * 3];
-				int z2 = map_vertices[p][(v + 1) % 3 * 3 + 2];
-
-				double m2 = 0;
-				
-				if (x2 - x1 != 0) {
-					m2 = (1.0 * z2 - z1) / (x2 - x1);
-				};
-
-				int b2 = z1 - m2 * x1;
-				
-				if (m1 - m2 != 0) {
-					px = (1.0 * b2 - b1) / (m1 - m2);
-				};
-
-				pz = m1 * px + b1;
-
-				if (x2 - x1 == 0) {
-					px = x2;
-					pz = m1 * px + b1;
-				};
-
-				if (((int)(plr.angleX) - 90) % 180 == 0) {
-					px = plr.x;
-					pz = m2 * px + b2;
-				};
-
-				if ((px < x1 == px < x2) && (pz < z1 == pz < z2)) {
-					continue;
-				};
-
-				frame_DrawCircleFilled(&frame, px, pz, 5, 0x0000FF00);
-
-				if (px1 == -1) {
-					px1 = px;
-					pz1 = pz;
-					continue;
-				};
-
-				px2 = px;
-				pz2 = pz;
-
-			};
-
-			*/
-
-			//frame_DrawLine(&frame, px1, pz1, px2, pz2, 0x00FF5500);
-
-			//frame_DrawLine(&frame, px1, pz1, px2, pz2, 0x00FF5500);
-
-			//frame_DrawCircleFilled(&frame, px1, pz1, 5, 0x0000FF00);
-			//frame_DrawCircleFilled(&frame, px2, pz2, 5, 0x0000FF00);
-
 			if (numOut == 3) {
 				continue;
 			};
-
-			//frame_DrawTriangleFilled(&frame, frame_x[0], frame_y[0], frame_x[1], frame_y[1], frame_x[2], frame_y[2], map_vertices[p][9]);
 
 			frame_DrawLine(&frame, frame_x[0], frame_y[0], frame_x[1], frame_y[1], -1);
 			frame_DrawLine(&frame, frame_x[1], frame_y[1], frame_x[2], frame_y[2], -1);
@@ -806,28 +597,23 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			frame_DrawText(&frame, frame_x[2] + 20, frame_y[2] + 20, "v2", 2, -1, 0x000000FF);
 
 
-
-
 		};
 
 
-
+		// (debug) display map layout & player
 		frame_DrawLineA(&frame, plr.x, plr.z, 300, plr.angleX + plr.fov / 2, 0x00333333);
 		frame_DrawLineA(&frame, plr.x, plr.z, 300, plr.angleX - plr.fov / 2, 0x00333333);
 
 		frame_DrawLineA(&frame, plr.x, plr.z, 10, plr.angleX + plr.fov / 2, 0x00F3C335);
 		frame_DrawLineA(&frame, plr.x, plr.z, 10, plr.angleX - plr.fov / 2, 0x00F3C335);
-
 		frame_DrawLineA(&frame, plr.x, plr.z, 500, plr.angleX, 0x00111111);
-
 
 		frame_DrawLine(&frame, frame.width / 2 - 5, frame.height / 2, frame.width / 2 + 5, frame.height / 2, 0x00FF0000);
 		frame_DrawLine(&frame, frame.width / 2, frame.height / 2 - 5, frame.width / 2, frame.height / 2 + 5, 0x00FF0000);
 
 
+		// (debug) display stats
 		char text[string_maxLength] = { 0 };
-
-
 
 		text_AppendString(&text, "angleX:");
 		text_AppendDouble(&text, plr.angleX);
@@ -848,7 +634,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		frame_DrawText(&frame, 10, 20, text, 2, 2, -1);
 
 
-		
+
 
 		InvalidateRect(hWnd, NULL, 0);
 		UpdateWindow(hWnd);
