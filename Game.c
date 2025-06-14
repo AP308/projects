@@ -105,142 +105,29 @@ void map_AddPolygon(int p, int x1, int y1, int z1, int x2, int y2, int z2, int x
 };
 
 
+				// index of polygon; use a constant num to keep switching it out, use map_GetEnd() to add new
+int map_AddRect(int p, int x1, int y1, int z1, int width, int height, int angX, int angY, int angZ, int color) {
 
-int map_AddRect(int p, int x1, int y1, int z1, int width, int height, int angleX, int angleY, int angleZ, int color) {
 
-
-	//frame_DrawRect(&frame, x1, z1, x1 + width, z1 + height, -1);
-
-	//angleY -= 90;
-
-	int ex1 = +width / 2 * cos(angleY * 3.14 / 180) + height / 2 * cos((angleY - 90) * 3.14 / 180);
-	int ey1 = +width / 2 * sin(angleY * 3.14 / 180) + height / 2 * sin((angleY - 90) * 3.14 / 180);
-
-	int ex2 = +width / 2 * cos(angleY * 3.14 / 180) - height / 2 * cos((angleY - 90) * 3.14 / 180);
-	int ey2 = +width / 2 * sin(angleY * 3.14 / 180) - height / 2 * sin((angleY - 90) * 3.14 / 180);
-
-	int ex3 = -width / 2 * cos(angleY * 3.14 / 180) - height / 2 * cos((angleY - 90) * 3.14 / 180);
-	int ey3 = -width / 2 * sin(angleY * 3.14 / 180) - height / 2 * sin((angleY - 90) * 3.14 / 180);
 
 	map_AddPolygon(
 		p,
 
-
-		/*
-		x1 + ,
+		x1,
 		y1,
-		z1 + width / 2 * sin(angleY * 3.14 / 180) + height / 2 * sin((angleY - 90) * 3.14 / 180),
+		z1,
 
-		x1 - width / 2 * cos(angleY * 3.14 / 180) - height / 2 * cos((angleY - 90) * 3.14 / 180),
-		y1,
-		z1 - width / 2 * sin(angleY * 3.14 / 180) - height / 2 * sin((angleY - 90) * 3.14 / 180),
+		x1 + width,
+		y1 + 0,
+		z1 + 0,
 
-		x1 + width / 2 * cos(angleY * 3.14 / 180) - height / 2 * cos((angleY - 90) * 3.14 / 180),
-		y1,
-		z1 + width / 2 * sin(angleY * 3.14 / 180) - height / 2 * sin((angleY - 90) * 3.14 / 180),*/
+		x1 + 0,
+		y1 + height,
+		z1 + width,
 
+		color
+	);		
 
-		x1 + width / 2 * cos(angleX * 3.14 / 180) + ex1,
-		y1 - height / 2 * sin(angleX * 3.14 / 180) - height / 2 * sin(angleZ * 3.14 / 180),
-		z1 - height / 2 * cos(angleZ * 3.14 / 180) + ey1,
-
-		x1 + width / 2 * cos(angleX * 3.14 / 180) + ex2,
-		y1 - height / 2 * sin(angleX * 3.14 / 180) + height / 2 * sin(angleZ * 3.14 / 180),
-		z1 + height / 2 * cos(angleZ * 3.14 / 180) + ey2,
-
-		x1 - width / 2 * cos(angleX * 3.14 / 180) + ex3,
-		y1 + height / 2 * sin(angleX * 3.14 / 180) + height / 2 * sin(angleZ * 3.14 / 180),
-		z1 + height / 2 * cos(angleZ * 3.14 / 180) + ey3,
-
-
-
-		-1
-
-	);
-
-	//angleX = 20;
-	//angleX
-
-	/*
-	map_AddPolygon(
-		p,
-
-		x1 + width / 2 * cos(angleX * 3.14 / 180),
-		y1 + height / 2 * sin(angleX * 3.14 / 180),
-		z1 - width / 2,
-
-		x1 + width / 2 * cos(angleX * 3.14 / 180),
-		y1 - height / 2 * sin(angleX * 3.14 / 180),
-		z1 + width / 2,
-
-		//50, 50, 50,
-		x1 - width / 2 * cos(angleX * 3.14 / 180),
-		y1 + height / 2 * sin(angleX * 3.14 / 180),
-		z1 + width / 2,
-
-
-
-		-1
-
-	);
-
-
-
-	//angleZ
-
-	map_AddPolygon(
-		p,
-
-		x1 + width / 2,
-		y1 - height / 2 * cos(angleZ * 3.14 / 180),
-		z1 - width / 2 * sin(angleZ * 3.14 / 180),
-
-		x1 - width / 2,
-		y1 - height / 2 * cos(angleZ * 3.14 / 180),
-		z1 - width / 2 * sin(angleZ * 3.14 / 180),
-
-		x1 - width / 2,
-		y1 + height / 2 * cos(angleZ * 3.14 / 180),
-		z1 + width / 2 * sin(angleZ * 3.14 / 180),
-
-		-1
-
-	);
-
-	//angleY
-	map_AddPolygon(
-		p,
-
-		x1 + width / 2 * cos(angleY * 3.14 / 180),
-		y1 - height / 2,
-		z1 - width / 2 * sin(angleY * 3.14 / 180),
-
-		x1 - width / 2 * cos(angleY * 3.14 / 180),
-		y1 - height / 2,
-		z1 + width / 2 * sin(angleY * 3.14 / 180),
-
-		x1 - width / 2 * cos(angleY * 3.14 / 180),
-		y1 + height / 2,
-		z1 + width / 2 * sin(angleY * 3.14 / 180),
-
-		-1
-
-	);
-	*/
-	//map_AddPolygon(x1 + width / 2, y1 + height / 2, z1, x1 - width / 2, y1 + height / 2, z1, x1 + width / 2, y1 - height / 2, z1, -1);
-
-
-	/*
-	// rX = 0
-
-	map_AddPolygon(x1 - width / 2, y1 - height / 2, z1, x1 + width / 2, y1 - height / 2, z1, x1 - width / 2, y1 + height / 2, z1, -1);
-	map_AddPolygon(x1 + width / 2, y1 + height / 2, z1, x1 - width / 2, y1 + height / 2, z1, x1 + width / 2, y1 - height / 2, z1, -1);
-
-
-	// rX = 90
-	map_AddPolygon(x1, y1 - height / 2, z1 - width / 2, x1, y1 - height / 2, z1 + width / 2, x1, y1 + height / 2, z1 - width / 2, -1);
-	map_AddPolygon(x1, y1 + height / 2, z1 + width / 2, x1, y1 + height / 2, z1 - width / 2, x1, y1 - height / 2, z1 + width / 2, -1);
-	*/
 
 	return;
 
@@ -295,9 +182,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	// create map
 
-	//map_AddRect(map_GetEnd(), 300, 50, 200, 200, 100, 0, 0, 0, -1);
+	map_AddRect(0, 300, 50, 200, 200, 100, 0, 0, 0, -1);
 
-	map_AddPolygon(map_GetEnd(), 100, 0, 100, 100, 30, 200, 220, 0, 120, -1);
+	//map_AddPolygon(map_GetEnd(), 100, 0, 100, 100, 30, 200, 220, 0, 120, -1);
 
 
 	/*
@@ -330,9 +217,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	map_vertices[2][mZ3] = 320;
 	*/
 
-	int angX = 0;
-	int angY = 0;
-	int angZ = 0;
+	int tempX = 0;
+	int tempY = 0;
+	int tempZ = 0;
 
 	plr.x = frame.width / 2;
 	plr.z = frame.height / 2;
@@ -411,16 +298,19 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		};
 
 		if (keys[88]) {	// X
-			angX += 2;
+			tempX += 2;
 		};
 
 		if (keys[89]) { // Y
-			angY += 2;
+			tempY += 2;
 		};
 
 		if (keys[90]) {	// Z
-			angZ += 2;
+			tempZ += 2;
 		};
+
+		map_AddRect(0, 300, 50, 200, 200, 100, tempX, tempY, tempZ, -1);
+
 
 		for (int i = 0; i < frame.width * frame.height; i++) {
 			frame.pixels[i] = 0;
@@ -516,7 +406,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 					frame_x[v] = (render_pixWidth * angleX + frame.width / 2);
 
-					angleY = 180 - angleY;
+					angleY = (angleY - 180) * (angleY <= 0)
+						+ (180 - angleY) * (angleY > 0);
+
 
 					frame_y[v] = render_pixHeight * angleY + frame.height / 2;
 
