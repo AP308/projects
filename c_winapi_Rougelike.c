@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <Math.h>
 
+// !IMPORTANT! - this file doesn't need anything attached to it; the drawing commands are within the source code
 
 static int running = 1;
 static int keys[128];
@@ -2894,3 +2895,4 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 
 	return 0;
 };
+
