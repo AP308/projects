@@ -17,7 +17,7 @@ HWND hWnd;
 int showMap = 1;
 int showMiniMap = 0;
 
-#define map_size 40
+#define map_size 100
 #define miniMap_scale 5
 
 float map[map_size][map_size] = { { 0 } };
@@ -27,14 +27,20 @@ int tile_scale = 1;
 
 
 #define num_genParams 3
-int genParams[num_genParams] = { 200, 50 };
+int genParams[num_genParams] = { 12, 100, 100 };
 enum {
-	PARAM_FLATNESS,
-	PARAM_PEAKNUM,
+	PARAM_PEAKHEIGHT,
+	PARAM_TERRAINHEIGHT,
+	PARAM_PEAKROUNDNESS
 };
 
 void map_Generate() {
 
+	for (int i = 0; i < num_genParams; i++) {
+		if (genParams[i] == 0) {
+			genParams[i] = 1;
+		};
+	};
 
 	for (int x = 0; x < map_size; x++) {
 
@@ -45,7 +51,7 @@ void map_Generate() {
 
 	};
 
-	for (int i = 0; i < genParams[PARAM_FLATNESS]; i++) {
+	for (int i = 0; i < genParams[PARAM_PEAKROUNDNESS]; i++) {
 
 		for (int x = 1; x < map_size - 1; x++) {
 
@@ -55,7 +61,7 @@ void map_Generate() {
 					continue;
 				};
 
-				if (rand() % genParams[PARAM_PEAKNUM]) {
+				if (rand() % genParams[PARAM_PEAKHEIGHT]) {
 					continue;
 				};
 
@@ -75,7 +81,7 @@ void map_Generate() {
 					continue;
 				};
 
-				if (rand() % genParams[PARAM_PEAKNUM]) {
+				if (rand() % genParams[PARAM_PEAKHEIGHT]) {
 					continue;
 				};
 
@@ -95,7 +101,7 @@ void map_Generate() {
 					continue;
 				};
 
-				if (rand() % genParams[PARAM_PEAKNUM]) {
+				if (rand() % genParams[PARAM_PEAKHEIGHT]) {
 					continue;
 				};
 
@@ -109,13 +115,13 @@ void map_Generate() {
 
 		for (int x = map_size - 1; x >= 1; x--) {
 
-			for(int y = map_size - 1; y >= 1; y--) {
+			for (int y = map_size - 1; y >= 1; y--) {
 				
 				if (map[x][y] == 0) {
 					continue;
 				};
 
-				if (rand() % genParams[PARAM_PEAKNUM]) {
+				if (rand() % genParams[PARAM_PEAKHEIGHT]) {
 					continue;
 				};
 
@@ -128,7 +134,7 @@ void map_Generate() {
 		};
 
 		frame_DrawRectFilled(&frame, 10, 10, 110, 30, 0x002200, 0.5);
-		frame_DrawRectFilled(&frame, 10, 10, 10 + 100 * (1.0 * i / genParams[PARAM_FLATNESS]), 30, 0x009900, 0);
+		frame_DrawRectFilled(&frame, 10, 10, 10 + 100 * (1.0 * i / genParams[PARAM_PEAKROUNDNESS]), 30, 0x009900, 0);
 		InvalidateRect(hWnd, NULL, 0);
 		UpdateWindow(hWnd);
 
@@ -209,7 +215,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	hWnd = CreateWindowEx(
 		0,
 		L"Class Name",
-		L"Terrain Gen - 'N': gen, 'A/D': rotate, '1-2': selectParam, 'up/down': changeVal, 'Q/E': toggleMaps'R': randValues",
+		L"Terrain Gen - 'N': gen, 'A/D': rotate, '1-2': selectParam, 'up/down': changeVal, 'Q/E': toggleMaps, 'R': randMap",
 		WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MAXIMIZEBOX | WS_MINIMIZEBOX,
 		rect.left,
 		rect.top,
@@ -275,23 +281,27 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			cooldown = 5;
 		};
 
-		if (keys['R'] && (cooldown <= 0)) {	// randomize genParams
+		if (keys['R'] && (cooldown <= 0)) {	// random map
 			for (int i = 0; i < num_genParams; i++) {
 				genParams[i] = rand() % 200;
 			};
+			map_Generate();
 			cooldown = 5;
 		};
 
-
 		cooldown--;
 
-		if (keys['1'] && (cooldown <= 0)) {
-			paramSelected = PARAM_FLATNESS;
+
+		for (int i = 0; i < num_genParams; i++) {
+
+			if (!keys['1' + i]) {
+				continue;
+			};
+
+			paramSelected = i;
+
 		};
 
-		if (keys['2'] && (cooldown <= 0)) {
-			paramSelected = PARAM_PEAKNUM;
-		};
 
 		if (GetAsyncKeyState(VK_UP)) {
 			genParams[paramSelected] += 2;
@@ -306,7 +316,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		};
 
 		
-		for (int x = map_size - 1; x >= 0; x--) {
+		for (int x = map_size - 1; x >= 0; x--) {	// draw map
 
 			if (!showMap) {
 				break;
@@ -318,21 +328,45 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 					continue;
 				};
 
-				if (map[x][y] > 1) {
+				int height = (int)(1.0 * map[x][y] * map_size + .5);
+				int bottomHeight = 0;
+
+				int h1 = 0;
+				int h2 = 0;
+				if (x > 0 && y > 0) {
+					h1 = (int)(1.0 * map[x - 1][y] * map_size + .5);
+					h2 = (int)(1.0 * map[x][y - 1] * map_size + .5);
+				};
+
+				bottomHeight = h1;
+				if (h2 < bottomHeight) {
+					bottomHeight = h2;
+				};
+
+				bottomHeight--;
+
+				if (bottomHeight > height) {
 					continue;
 				};
 
-				int height = (int)(1.0 * map[x][y] * map_size + .5);	// round height up
-				float colorMult = 1.3 * height / map_size;
+				float colorMult = 1.4 * height / map_size;
 
 				int color = 0xffffff;
 
-				if (map[x][y] < .55) {
+				if (map[x][y] < .55 * (genParams[PARAM_TERRAINHEIGHT] / 100.0)) {	// grass
 					color = 0x00ff00;
 				};
 
-				if (map[x][y] < .48) {
+				if (map[x][y] < .49 * (genParams[PARAM_TERRAINHEIGHT] / 100.0)) {	// sand
+					color = 0xeecc99;
+				};
+
+				if (map[x][y] < .48 * (genParams[PARAM_TERRAINHEIGHT] / 100.0)) {	// water
 					color = 0x0000ff;
+				};
+
+				if (map[x][y] < .44 * (genParams[PARAM_TERRAINHEIGHT] / 100.0)) {	// deepWater
+					color = 0x000088;
 				};
 
 				short r = GetRValue(color) * colorMult;
@@ -340,13 +374,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 				short b = GetBValue(color) * colorMult;
 
 				int x1 = tile_scale * (x - y);
-				int y1 = tile_scale * (x + y);
+				int y1 = tile_scale * (x + y + bottomHeight);
 				int x2 = tile_scale * (x - y + 1);
-				int y2 = tile_scale * (x + y + 1);
+				int y2 = tile_scale * (x + y + bottomHeight + 1);
 				int x3 = x2;
-				int y3 = y2 + tile_scale * height;
+				int y3 = tile_scale * (x + y + height + 1);
 				int x4 = x1;
-				int y4 = y1 + tile_scale * height;
+				int y4 = tile_scale * (x + y + height);
 
 				frame_DrawTriangleFilled(&frame,
 					x1 + map_realX,
@@ -365,12 +399,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 					x4 + map_realX,
 					y4 + map_realY,
 					RGB((int)(r * .3), (int)(g * .3), (int)(b * .3))
-				);
+				);				
 
 				x2 = tile_scale * (x - y - 1);
-				y2 = tile_scale * (x + y + 1);
+				y2 = tile_scale * (x + y + 1 + bottomHeight);
 				x3 = x2;
-				y3 = y2 + tile_scale * height;
+				y3 = tile_scale * (x + y + 1 + height);
 
 				frame_DrawTriangleFilled(&frame,
 					x1 + map_realX,
@@ -460,31 +494,44 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		};
 
 
-		char text[string_maxLength] = { 0 };
 
-		switch (paramSelected) {
+		char text[string_maxLength] = { 0 };	// display values
 
-		case (PARAM_FLATNESS): {
-			text_AppendString(text, "Flatness");
-			break;
-		}
+		for (int i = 0; i < num_genParams; i++) {
 
-		case (PARAM_PEAKNUM): {
-			text_AppendString(text, "NumPeaks");
-			break;
-		}
+			text_ClearString(text);
 
-		default: {
-			text_AppendString(text, "none");
-			break;
-		}
+			if (i == paramSelected) {
+				text_AppendString(text, ">");
+			};
+
+			switch (i) {
+
+			case (PARAM_PEAKHEIGHT): {
+				text_AppendString(text, "PeakHeight: ");
+				break;
+			}
+
+			case (PARAM_TERRAINHEIGHT): {
+				text_AppendString(text, "TerrainHeight: ");
+				break;
+			}
+
+			case (PARAM_PEAKROUNDNESS): {
+				text_AppendString(text, "PeakRoundness: ");
+				break;
+			}
+			};
+
+			text_AppendInt(text, genParams[i]);
+			frame_DrawText(&frame, 10, frame.height - 20 * (i + 1), text, 2, 2, -1, 0);
 
 		};
 
-		text_AppendString(text, ": ");
-		text_AppendInt(text, genParams[paramSelected]);
-		frame_DrawText(&frame, 10, frame.height - 20, text, 2, 2, -1, 0);
+		frame_DrawText(&frame, 20, frame.height / 2, "<A", 2, 2, -1, 0);
+		frame_DrawText(&frame, frame.width - 45, frame.height / 2, "D>", 2, 2, -1, 0);
 
+		frame_DrawText(&frame, 10, 20, "Q", 2, 2, -1, 0);
 
 		InvalidateRect(hWnd, NULL, 0);
 		UpdateWindow(hWnd);
