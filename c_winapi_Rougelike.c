@@ -198,7 +198,7 @@ void frame_DrawText(int x1, int y1, char text[], int text_xScale, int text_yScal
 		letter_id = (int)(text[letter]) - 32;
 		letter_line = 0;
 		letter_column = -1;
-		
+
 		for (int i = 0; i < (letter_width * letter_height); i++) {
 
 			if (text[letter] == 0) {
@@ -230,7 +230,7 @@ void frame_DrawText(int x1, int y1, char text[], int text_xScale, int text_yScal
 				};
 
 				for (int sY = 0; sY < text_yScale; sY++) {
-					
+
 					int y = y1;
 					y += (letter_height * text_yScale) - (letter_line * text_yScale + sY);	// flip upside down
 					y -= letter_height * text_yScale;	// shift down
@@ -238,9 +238,9 @@ void frame_DrawText(int x1, int y1, char text[], int text_xScale, int text_yScal
 					if (y < 0 || y >= frame.height) {
 						continue;
 					};
-					
+
 					frame.pixels[y * frame.width + x] = color;
-					
+
 
 				};
 
@@ -1954,8 +1954,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 
 	};
 
-	#define wordList_adjectives_maxLength 11
-	#define wordList_nouns_maxLength 12
+#define wordList_adjectives_maxLength 11
+#define wordList_nouns_maxLength 12
 
 
 	text_AppendString(&wordList_adjectives[0], "Basic");
@@ -1999,7 +1999,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 		{0, 0, -1}
 	};
 
-	
+
 	plr.gear_stats[0][0] = 8;
 	plr.gear_stats[0][1] = 0;
 
@@ -2023,7 +2023,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 
 	int inv_counter1 = 0;
 	int inv_counter2 = 0;
-	
+
 	MSG msg = { };
 	while (running == 1) {
 
@@ -2059,10 +2059,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 			game_inventory_open = 0;
 			inv_counter2 = 0;
 		};
-	
+
 		inv_counter1++;
 		inv_counter2++;
-		
+
 
 
 		// tile effects
@@ -2143,7 +2143,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 
 			if (plr.gold > 0) {
 
-				char s_goldLoss[100] = { 0 };				
+				char s_goldLoss[100] = { 0 };
 				int goldLoss = rand() % 5;
 
 				s_goldLoss[0] = '-';
@@ -2153,7 +2153,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 				message_AddMessage(s_goldLoss, dr);
 				plr.gold -= 1;
 			};
-			
+
 			game_battle_in = 0;
 		};
 
@@ -2172,7 +2172,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 
 			};
 
-				// gold reward
+			// gold reward
 			plr.gold += reward;
 			char msg[100] = { 0 };
 			msg[0] = '+';
@@ -2182,9 +2182,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 
 
 			char item_name_temp[100] = { 0 };
-			
 
-				// sword reward
+
+			// sword reward
 			if (!(rand() % (10 / game_battle_difficulty))) {
 
 				text_AppendString(item_name_temp, wordList_adjectives[rand() % wordList_adjectives_maxLength]);
@@ -2195,15 +2195,15 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 				text_AppendString(&plr.gear_names[0], item_name_temp);
 
 				plr.gear_stats[0][0] += rand() % (10 + game_battle_difficulty) + 1;	// boost hp
-				
+
 				text_ClearString(&msg);
 				msg[0] = '+';
 				text_AppendString(&msg, plr.gear_names[0]);
 				message_AddMessage(msg, db);
 
 			};
-			
-				// plate reward
+
+			// plate reward
 			if (!(rand() % (10 / game_battle_difficulty))) {
 
 				text_ClearString(&item_name_temp);
@@ -2215,7 +2215,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 				text_AppendString(&plr.gear_names[1], item_name_temp);
 
 				plr.gear_stats[1][1] += rand() % (4 + game_battle_difficulty) + 1;	// boost attack
-				
+
 				text_ClearString(&msg);
 				msg[0] = '+';
 				text_AppendString(&msg, plr.gear_names[1]);
@@ -2233,7 +2233,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 
 			};
 
-;
+			;
 
 			game_battle_in = 0;
 
@@ -2463,7 +2463,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 
 		// start battle - spawn enemies
 		game_battle_in = 1;
-		
+
 		if (map[plr_tile_x][plr_tile_y] != TILE_LUSHGRASS) {
 			game_battle_in = 0;
 		};
@@ -2495,9 +2495,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 				game_battle_enemies[enemy][0] = plr.stats[0] * 0.5 * (0.5 + (rand() % 10) / 10.0) + 1;
 				game_battle_enemies[enemy][1] = game_battle_enemies[enemy][0] / 4.0 * (0.5 + (rand() % 10) / 10.0) + 1;
 				game_battle_enemies[enemy][2] = IMAGE_MONSTER_ELF;
-				
+
 				game_battle_difficulty += 1;
-				
+
 				if (rand() % 3) {	// spawn boss
 					continue;
 				};
@@ -2505,13 +2505,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 				game_battle_enemies[enemy][0] = plr.stats[0] * 1.0 * (0.5 + (rand() % 10) / 10.0) + 1;
 				game_battle_enemies[enemy][1] = game_battle_enemies[enemy][0] / 4.0 * (0.5 + (rand() % 10) / 10.0) + 1;
 				game_battle_enemies[enemy][2] = IMAGE_MONSTER_ELFBOSS;
-				
+
 				game_battle_difficulty += 2;
 
 			};
 
 			if (game_battle_enemies[0][0] == 0 && game_battle_enemies[1][0] == 0 && game_battle_enemies[2][0] == 0) {	// mega boss when no other mob spawns
-				
+
 				game_battle_enemies[1][0] = plr.stats[0] * 1.2 * (0.5 + (rand() % 10) / 10.0) + 1;
 				game_battle_enemies[1][1] = game_battle_enemies[1][0] / 3.0 * (0.5 + (rand() % 10) / 10.0) + 1;
 				game_battle_enemies[1][2] = IMAGE_MONSTER_ELFBOSS;
@@ -2741,50 +2741,50 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 		char hp[100] = { 0 };
 
 
-			// draw inventory
+		// draw inventory
 		if (game_inventory_open == 1) {
 
 			frame_DrawRectFilled(frame.width / 2 - 155, frame.height / 2 - 155, frame.width / 2 + 145, frame.height / 2 + 145, 0x00111111);
 			frame_DrawRectFilled(frame.width / 2 - 150, frame.height / 2 - 150, frame.width / 2 + 150, frame.height / 2 + 150, 0x00333333);
 			frame_DrawText(frame.width / 2 - 140, frame.height / 2 + 135, "Inventory", 3, 3, 0x00555555);
 
-				// exit button
+			// exit button
 			frame_DrawRectFilled(frame.width / 2 + 97, frame.height / 2 + 117, frame.width / 2 + 137, frame.height / 2 + 137, 0x00AA3333);
 			frame_DrawRectFilled(frame.width / 2 + 100, frame.height / 2 + 120, frame.width / 2 + 140, frame.height / 2 + 140, 0x00FF3333);
-			frame_DrawText(frame.width /2 + 103, frame.height / 2 + 135, "[E]", 2, -1, 0x00AA3333);
-			
+			frame_DrawText(frame.width / 2 + 103, frame.height / 2 + 135, "[E]", 2, -1, 0x00AA3333);
 
-			
+
+
 			frame_DrawRectFilled(frame.width / 2 - 145, frame.height / 2 + 105, frame.width / 2 + 145, frame.height / 2 + 107, 0x00555555);
 
 			frame_DrawRectFilled(frame.width / 2 - 55, frame.height / 2 - 140, frame.width / 2 - 53, frame.height / 2 + 100, 0x00555555);	// vertical seperator bar
 
 			frame_DrawRectFilled(frame.width / 2 - 145, frame.height / 2 - 20, frame.width / 2 - 60, frame.height / 2 - 18, 0x00555555);	// short horizontal seperator bar (plr stats | atk & extra)
-			
+
 
 			frame_DrawText(frame.width / 2 - 130, frame.height / 2 + 90, "Stats", 2, 2, 0x00555555);
-			
-			frame_DrawImage(PLAYER_NORMAL, frame.width / 2 - 120, frame.height / 2 - 4 , 3, -1);
+
+			frame_DrawImage(PLAYER_NORMAL, frame.width / 2 - 120, frame.height / 2 - 4, 3, -1);
 
 			char hp[100] = { 0 };
 			text_AppendInt(&hp, plr.stats[0]);
 			frame_DrawText(frame.width / 2 - 97 - (text_GetSize(hp) * 6), frame.height / 2 + 69, hp, 2, -1, 0x00FF3333);
 			frame_DrawImage(IMAGE_HEART, frame.width / 2 - 110 - (text_GetSize(hp) * 6), frame.height / 2 + 60, 2, -1);
-			
+
 			/*
 			char atk[100] = { 0 };
 			text_AppendInt(&atk, plr.stats[1]);
 			frame_DrawText(frame.width / 2 - 117 , frame.height / 2 - 38, atk, 2, -1, 0x003333FF);
 			frame_DrawImage(IMAGE_SWORD, frame.width / 2 - 130, frame.height / 2 - 47, 2, -1);
 			*/
-			
+
 			frame_DrawText(frame.width / 2 - 40, frame.height / 2 + 90, "Gear", 2, 2, 0x00555555);
-			
-			
+
+
 			// max weapon name length: 25
 
 			frame_DrawRectFilled(frame.width / 2 - 40, frame.height / 2 + 70, frame.width / 2 - 10, frame.height / 2 + 40, 0x00555555);
-			
+
 			frame_DrawImage(IMAGE_ICON_SWORD, frame.width / 2 - 35, frame.height / 2 + 45, 3, -1);
 
 			frame_DrawText(frame.width / 2 - 5, frame.height / 2 + 69, plr.gear_names[1], (ceil)(130.0 / (text_GetSize(plr.gear_names[1]) * 6)), 2, 0x00555555);
@@ -2797,7 +2797,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 			frame_DrawText(frame.width / 2 + 8, frame.height / 2 + 54, atk, 2, -1, 0x003333FF);
 			frame_DrawImage(IMAGE_SWORD, frame.width / 2 - 5, frame.height / 2 + 45, 2, -1);
 
-			
+
 
 
 			frame_DrawRectFilled(frame.width / 2 - 40, frame.height / 2 + 30, frame.width / 2 - 10, frame.height / 2 + 0, 0x00555555);
@@ -2816,15 +2816,15 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hprevInstance, PWSTR pCmdLine
 
 		};
 
-		
 
-		
+
+
 		InvalidateRect(hWnd, NULL, 0);
 		UpdateWindow(hWnd);
 
 		Sleep(20);
 	};
-	
+
 
 	return 0;
 };
@@ -2895,4 +2895,3 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 
 	return 0;
 };
-
