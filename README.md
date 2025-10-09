@@ -1,6 +1,8 @@
 These are all my Visual Studio projects.
-Most of them are finished and 'working', however:
-- for the ones with 'c_winapi' in the title, you must link the file up with: Drawing.h, Drawing.c, Util.h, and Util.c. You can find these in ArchimedesP/CTools.
-- the 'c_winapi' projects might be a bit outdated, since the updated 'Drawing.h' functions have an 'opacity' parameter that the older files don't account for; which u can fix by adding a 0 to the last parameter
+Most of them are finished and 'working', however you must compile them yourself, as they are just C source files.
+Keep in mind that you need the c_tools header/C files to compile them with.
+Also, some of them don't link properly, which I will fix one day.
+
+OR: you can play some of these directly at: ap308.itch.io
 
 Enjoy!
